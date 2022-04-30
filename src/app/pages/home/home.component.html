@@ -1,1 +1,58 @@
-<p>home works!</p>
+<div class="div-content">
+  <section class="text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">Movie Date Base</h1>
+        <p class="lead text-muted">
+          informacion de peliculas y series.
+        </p>
+        <form class="d-flex">
+          <input class="form-control me-2" 
+          name="textSearch"
+          [(ngModel)]="textSearch"
+          type="search" 
+          placeholder="Busca Series, Peliculas y Mas" 
+          aria-label="Search">
+          <button class="btn btn-outline-success" type="button" (click)="onClickSearch()" >Buscar</button>
+        </form>
+      </div>
+    </div>
+  </section>
+  
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+      <div *ngIf="movielist.length==0">
+        <h3 class="text-center">No existen resultados para su busqueda</h3>
+      </div>
+      <div *ngIf="loading==true" class="d-flex align-items-center">
+        <strong>Cargando...</strong>
+        <div class="spinner-border ml-auto" role="status" aria-hidden="true"></div>
+      </div>
+      <div *ngIf="movielist.length>0 && loading==false" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div *ngFor="let movie of movielist" class="col">
+          <div class="card shadow-sm">
+            <img src="{{movie.Poster}}" class="card-img-top" alt="">
+
+            <div class="card-body">
+              <p class="card-text">{{movie.Title}}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a
+                    href="https://www.imdb.com/title/{{movie.imdbID}}/"
+                    target="_blank"
+                    type="button"
+                    class="btn btn-sm btn-outline-secondary"
+                  >
+                    Ver mas
+                  </a>
+                </div>
+                <small class="text-muted">{{movie.Year}}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
