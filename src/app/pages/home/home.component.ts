@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Result, Thumbnail,Data } from 'src/app/interfaces/interfaces';
+import { Result, Thumbnail,Data, Pelicula } from 'src/app/interfaces/interfaces';
 import { MoviesService } from 'src/app/services/movies.service';
 import { Observable, observable } from 'rxjs';
 @Component({
@@ -8,6 +8,7 @@ import { Observable, observable } from 'rxjs';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
+  movielist:Pelicula[]=[];
   characters: Result[] = [];
   textSearch: string = '';
   loading: boolean = false;
@@ -18,30 +19,39 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {  
     this.loading = true;
     setTimeout(() => {
-      this.service.getAllcharacters().subscribe((resp) => {
+      // this.service.getAllcharacters()
+      // .subscribe((resp) => {
+      //   this.loading = false;
+      //   this.characters = resp.data.results;
+      //   console.log(this.characters);
+      // })
+      this.service.getDataPeliculas().subscribe((resp) => {
+        console.log(resp);
         this.loading = false;
-        this.characters = resp.data.results;
-        console.log(this.characters);
+        this.movielist = resp;
+        console.log(this.movielist);
       })
+
     }, 1);
+
   }
 
   onClickSearch() {
-    console.log('busqueda');
-    this.loading = true;
-    console.log('click en busqueda:' + this.textSearch);
+    // console.log('busqueda');
+    // this.loading = true;
+    // console.log('click en busqueda:' + this.textSearch);
 
-    setTimeout(() => {
-    this.service.searchCharacter(this.textSearch).subscribe((resp) => {
-        this.loading = false;
-        console.log(resp);
-        if (resp.data.results.length > 0) {
+    // setTimeout(() => {
+    // this.service.searchCharacter(this.textSearch).subscribe((resp) => {
+    //     this.loading = false;
+    //     console.log(resp);
+    //     if (resp.data.results.length > 0) {
           
-          this.characters = resp.data.results;
-        } else {
-          this.characters = [];
-        }
-      });
-    }, 2500);
+    //       this.characters = resp.data.results;
+    //     } else {
+    //       this.characters = [];
+    //     }
+    //   });
+    // }, 2500);
   }
 }

@@ -7,11 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
   
+  
   items : any[] = [
     {
       url: 'home',
       text: 'Home',
       icon: 'bi-house'
+    },
+    {
+      url: 'mantpeliculas',
+      text: 'Mantenedor Comics',
+      icon: 'bi-book'
     },
     {
       url: 'about',
@@ -29,6 +35,7 @@ export class MenuComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    
   }
 
 }

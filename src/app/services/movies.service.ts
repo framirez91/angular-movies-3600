@@ -1,14 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Result,Thumbnail,Data, RootObject } from '../interfaces/interfaces';
+import { Result,Thumbnail,Data, RootObject, Pelicula } from '../interfaces/interfaces';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
+const url =environment.URL;
 
 @Injectable({
   providedIn: 'root'
 })
 export class MoviesService {
-
+  
   constructor(private http:HttpClient) { }
     PUBLIC_KEY= '8025e3d0f1c5672eb6f9bc796b613b82';
     HASH= '5e8003b410af946e656b6988ed048af7';
@@ -27,6 +29,18 @@ export class MoviesService {
     searchCharacter(text:string){
       return this.http.get<RootObject>('https://gateway.marvel.com/v1/public/characters?nameStartsWith='+text+'&ts=1000&apikey=8025e3d0f1c5672eb6f9bc796b613b82&hash=5e8003b410af946e656b6988ed048af7');
     }
+
+    getDataPeliculas(){
+      return this.http.get<Pelicula[]>(`${url}/peliculas`);
+    }
+
+    postPelicula(pelicula:Pelicula){
+      return this.http.post<Pelicula>(`${url}/peliculas`,pelicula);
+    }
+
+  
+
+
                               
 
 
